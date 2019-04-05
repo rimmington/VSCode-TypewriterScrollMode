@@ -37,14 +37,12 @@ class TypewriterModeController {
             this._statusBarItem.hide();
         } else {
             let doc = editor.document;
-            if ((doc.languageId === 'markdown') || (doc.languageId === 'plaintext')) {
-                if (enabled) {
-                    this._statusBarItem.text = "typewriter ON";
-                } else {
-                    this._statusBarItem.text = "typewriter OFF";
-                }
-                this._statusBarItem.show();
+            if (enabled) {
+                this._statusBarItem.text = "typewriter ON";
+            } else {
+                this._statusBarItem.text = "typewriter OFF";
             }
+            this._statusBarItem.show();
         }
 
         let subscriptions: Disposable[] = [];
@@ -73,15 +71,11 @@ class TypewriterModeController {
         }
 
         let doc = editor.document;
-        if ((doc.languageId === 'markdown') || (doc.languageId === 'plaintext')) {
-            let selection = editor.selection;
+        let selection = editor.selection;
 
-            let range = new Range(selection.active, selection.active);
-            editor.revealRange(range, TextEditorRevealType.InCenter);
-            this._statusBarItem.show();
-        } else {
-            this._statusBarItem.hide();
-        }
+        let range = new Range(selection.active, selection.active);
+        editor.revealRange(range, TextEditorRevealType.InCenter);
+        this._statusBarItem.show();
     }
 
     private _onConfigurationChanged() {
